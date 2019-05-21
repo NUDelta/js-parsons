@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>XKCD Drag Function - Parsons</title>
+    <link href="../parsons.css" rel="stylesheet" />
+    <link href="../lib/prettify.css" rel="stylesheet" />
+    <script src="../lib/prettify.js"></script>
+</head>
+
+<body>
+    <!-- Here you'd include the assignment description... -->
+    <h2>XKCD Drag Function - Parsons</h2>
+
+    <!-- These are the elements which will include the lines of code -->
+    <div id="jsparsons-source" class="sortable-code"></div>
+    <div id="jsparsons-target" class="sortable-code"></div>
+
+    <!-- Links to reset the assignment and to get feedback -->
+    <p>
+        <a href="#" id="newInstanceLink">New instance</a>
+        <a href="#" id="feedbackLink">Get feedback</a>
+    </p>
+
+    <!-- Load the JavaScript files required -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+    <script src="../lib/underscore-min.js"></script>
+    <script src="../lib/lis.js"></script>
+    <script src="../parsons.js"></script>
+    <script>
+        // here comes the exercise definition JavaScript
+        var initial =
+            "function drag(e) \n" +
+            " if (scroll_delta) \n" +
+            "  var pos = eventPos(e); \n" +
+            "  position[0] = \n" +
+            "  Math.round(pos.pageX + scroll_delta[0])\n" +
+            "  position[1] = \n" +
+            "  Math.round(pos.pageY + scroll_delta[1])\n" + 
+            "  update() \n"
+
+        $(document).ready(function () {
+                var parson = new ParsonsWidget({
+                    'sortableId': 'jsparsons-target',
+                    'trashId': 'jsparsons-source'
+                    // 'unittests': unittests
+                });
+                parson.init(initial);
+                parson.shuffleLines();
+                $("#newInstanceLink").click(function (event) {
+                    event.preventDefault();
+                    parson.shuffleLines();
+                });
+                $("#feedbackLink").click(function (event) {
+                    event.preventDefault();
+                    var fb = parson.getFeedback();
+                    $("#jsparson").html("<h2>Feedback from testing your program:</h2>" +
+                        fb.feedback);
+                    if (fb.success) { alert("Good, you solved the assignment!"); }
+                });
+            });
+    </script>
+</body>
+
+</html>
